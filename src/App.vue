@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li class="nav-item">
-          <img class="logo" src="./assets/build-a-bot-logo.png" alt="logo"/>
+          <img class="logo" src="./assets/build-a-bot-logo.png" alt="logo" />
           Build-a-bot
         </li>
       </ul>
@@ -17,15 +17,15 @@
 
 <script>
 // import HomePage from './home/HomePage.vue'
-import RobotBuilder from './build/RobotBuilder.vue'
+import RobotBuilder from './build/RobotBuilder.vue';
 
 export default {
   name: 'App',
   components: {
     // HomePage,
     RobotBuilder,
-},
-}
+  },
+};
 </script>
 
 <style>
