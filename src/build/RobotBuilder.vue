@@ -2,6 +2,9 @@
   <div>
     <div class="top-row">
       <div class="top part">
+        <div class="robot-name">
+          {{ selectedRobot.head.title }}
+        </div>
         <img :src="selectedRobot.head.imageUrl" alt="head" />
         <button @:click="selectPrevHead()" class="prev-selector">&#9668;</button>
         <button @:click="selectNextHead()" class="next-selector">&#9658;</button>
@@ -212,5 +215,12 @@ export default {
 
 .right .next-selector {
   right: -3px;
+}
+
+.robot-name {
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
 }
 </style>
