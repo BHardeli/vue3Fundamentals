@@ -2,7 +2,7 @@
   <div class="content">
     <button class="add-to-cart" @:click="addToCart()">Add to Cart</button>
     <div class="top-row">
-      <div class="top part">
+      <div class="top part" :style="headBorderStyle">
         <div class="robot-name">
           {{ selectedRobot.head.title }}
           <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
@@ -57,9 +57,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
 import parts from "../data/parts";
 import { toCurrency } from "../shared/formatters"
+import { computed, ref } from "vue";
 
 
 function getNextValidIndex(index, length) {
@@ -87,6 +87,10 @@ const selectedRobot = computed(() => ({
   torso: availableParts.torsos[selectedTorsoIndex.value],
   rightArm: availableParts.arms[selectedRightArmsIndex.value],
   base: availableParts.bases[selectedBasesIndex.value],
+}));
+
+const headBorderStyle = computed(() => ({
+  border: selectedRobot.value.head.onSale ? '3px solid red' : '3px solid #aaa'
 }));
 
 const selectNextHead = () => {
