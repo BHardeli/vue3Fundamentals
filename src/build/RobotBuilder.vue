@@ -1,20 +1,35 @@
 <template>
   <div class="content">
-    <button class="add-to-cart" @:click="addToCart()">Add to Cart</button>
+    <div class="preview">
+      <div class="preview-content">
+        <div class="top-row">
+          <img :src="selectedRobot.head.imageUrl" />
+        </div>
+        <div class="middle-row">
+          <img :src="selectedRobot.leftArm.imageUrl" class="rotate-left" />
+          <img :src="selectedRobot.torso.imageUrl" />
+          <img :src="selectedRobot.rightArm.imageUrl" class="rotate-right" />
+        </div>
+        <div class="bottom-row">
+          <img :src="selectedRobot.base.imageUrl" />
+        </div>
+      </div>
+      <button class="add-to-cart" @:click="addToCart()">Add to Cart</button>
+    </div>
     <div class="top-row">
       <div class="robot-name">
         {{ selectedRobot.head.title }}
         <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
       </div>
-      <ParSelector :parts="availableParts.heads" position="top" />
+      <ParSelector :parts="availableParts.heads" position="top" @selectedPart="part => selectedRobot.head = part" />
     </div>
     <div class="middle-row">
-      <ParSelector :parts="availableParts.arms" position="left" />
-      <ParSelector :parts="availableParts.torsos" position="center" />
-      <ParSelector :parts="availableParts.arms" position="right" />
+      <ParSelector :parts="availableParts.arms" position="left" @selectedPart="part => selectedRobot.leftArm = part" />
+      <ParSelector :parts="availableParts.torsos" position="center" @selectedPart="part => selectedRobot.torso = part" />
+      <ParSelector :parts="availableParts.arms" position="right" @selectedPart="part => selectedRobot.rightArm = part" />
     </div>
     <div class="bottom-row">
-      <ParSelector :parts="availableParts.bases" position="bottom" />
+      <ParSelector :parts="availableParts.bases" position="bottom" @selectedPart="part => selectedRobot.base = part" />
     </div>
   </div>
   <div>
@@ -59,6 +74,7 @@ const headBorderColor = computed(() =>
 
 const addToCart = () => {
   const robot = selectedRobot.value;
+  console.log(robot)
   const cost =
     robot.head.cost +
     robot.base.cost +
@@ -199,10 +215,35 @@ const addToCart = () => {
   position: relative;
 }
 
+.preview {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 310px;
+  height: 310px;
+  padding: 5px;
+}
+
+.preview-content {
+  border: 1px solid #999;
+}
+
+.preview img {
+  width: 70px;
+  height: 70px;
+}
+
+.rotate-right {
+  transform: rotate(90deg);
+}
+
+.rotate-left {
+  transform: rotate(-90deg);
+}
+
 .add-to-cart {
   position: absolute;
-  right: 30px;
-  width: 220px;
+  width: 310px;
   padding: 3px;
   font-size: 16px;
 }

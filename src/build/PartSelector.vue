@@ -19,8 +19,11 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['partSelected']);
 const selectedPartIndex = ref(0);
 const selectedPart = computed(() => props.parts[selectedPartIndex.value]);
+
+emit('selectedPart', selectedPart);
 
 function getPreviousValidIndex(index, length) {
     const deprecatedIndex = index - 1;
@@ -37,7 +40,7 @@ const selectNextPart = () => {
         selectedPartIndex.value,
         props.parts.length,
     );
-    console.log(selectedPart.value);
+    emit('selectedPart', selectedPart);
 };
 
 const selectPreviousPart = () => {
@@ -45,6 +48,7 @@ const selectPreviousPart = () => {
         selectedPartIndex.value,
         props.parts.length,
     );
+    emit('selectedPart', selectedPart);
 };
 </script>
   
