@@ -122,7 +122,7 @@ const selectPrevBases = () => {
 const addToCart = () => {
   const robot = selectedRobot.value;
   const cost = robot.head.cost + robot.base.cost + robot.leftArm.cost + robot.rightArm.cost + robot.torso.cost;
-  cart.push({ ...robot, cost });
+  cart.value.push({ ...robot, cost });
 };
 
 </script>
