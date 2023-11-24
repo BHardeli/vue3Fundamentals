@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" v-if="partsStore.parts">
     <div class="preview">
       <CollapsibleSection>
         <template v-slot:collapse>&#x25B2; Hide</template>
@@ -26,31 +26,31 @@
         <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
       </div>
       <ParSelector
-        :parts="availableParts.heads"
+        :parts="partsStore.parts.heads"
         position="top"
         @selectedPart="(part) => (selectedRobot.head = part)"
       />
     </div>
     <div class="middle-row">
       <ParSelector
-        :parts="availableParts.arms"
+        :parts="partsStore.parts.arms"
         position="left"
         @selectedPart="(part) => (selectedRobot.leftArm = part)"
       />
       <ParSelector
-        :parts="availableParts.torsos"
+        :parts="partsStore.parts.torsos"
         position="center"
         @selectedPart="(part) => (selectedRobot.torso = part)"
       />
       <ParSelector
-        :parts="availableParts.arms"
+        :parts="partsStore.parts.arms"
         position="right"
         @selectedPart="(part) => (selectedRobot.rightArm = part)"
       />
     </div>
     <div class="bottom-row">
       <ParSelector
-        :parts="availableParts.bases"
+        :parts="partsStore.parts.bases"
         position="bottom"
         @selectedPart="(part) => (selectedRobot.base = part)"
       />
@@ -59,15 +59,16 @@
 </template>
 
 <script setup>
-import parts from "../data/parts";
 import { computed, ref } from "vue";
 import ParSelector from "./PartSelector.vue";
 import CollapsibleSection from "@/shared/CollapsibleSection.vue";
 import { useCartStore } from "@/stores/cartStore";
+import { usePartStore } from "@/stores/partsStore";
 
 const cartStore = useCartStore();
+const partsStore = usePartStore();
 
-const availableParts = parts;
+partsStore.getParts();
 
 const selectedRobot = ref({
   head: {},
