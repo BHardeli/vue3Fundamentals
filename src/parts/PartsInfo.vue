@@ -9,14 +9,11 @@
 
 <script setup>
 import { computed } from "@vue/reactivity";
-import { useRoute } from "vue-router";
 import parts from "../data/parts"
 
+const props = defineProps(['partType', 'id']);
 const part = computed(() => {
-    const route = useRoute();
-    const partType = route.params.partType;
-    const partId = route.params.id;
-    return parts[partType].find(part => part.id === +partId);
+    return parts[props.partType].find(part => part.id === +props.id);
 });
 
 </script>

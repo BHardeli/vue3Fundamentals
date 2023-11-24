@@ -26,7 +26,8 @@ export default createRouter({
         {
             path: '/parts/:partType/:id',
             name: 'Parts',
-            component: PartsInfo
+            component: PartsInfo,
+            props: true
         }
     ]
 })
