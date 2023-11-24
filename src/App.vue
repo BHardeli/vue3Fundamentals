@@ -3,7 +3,11 @@
     <nav>
       <ul>
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link" active-class="home-active">
+          <router-link
+            :to="{ name: 'Home' }"
+            class="nav-link"
+            active-class="home-active"
+          >
             <img class="logo" src="./assets/build-a-bot-logo.png" alt="logo" />
             Build-a-bot
           </router-link>
@@ -18,6 +22,11 @@
             Search
           </router-link>
         </li>
+        <li class="nav-item cart">
+          <router-link :to="{ name: 'Cart' }" class="nav-link">
+            Cart
+          </router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -26,9 +35,7 @@
   </main>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style>
 #app {
@@ -66,6 +73,12 @@ ul {
   padding: 5px 10px;
   font-size: 22px;
   border-right: 1px solid #bbb;
+}
+
+.nav-item.cart {
+  position: relative;
+  margin-left: auto;
+  border-right: none;
 }
 
 .nav-link {

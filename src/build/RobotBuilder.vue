@@ -25,45 +25,49 @@
         {{ selectedRobot.head.title }}
         <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
       </div>
-      <ParSelector :parts="availableParts.heads" position="top" @selectedPart="part => selectedRobot.head = part" />
+      <ParSelector
+        :parts="availableParts.heads"
+        position="top"
+        @selectedPart="(part) => (selectedRobot.head = part)"
+      />
     </div>
     <div class="middle-row">
-      <ParSelector :parts="availableParts.arms" position="left" @selectedPart="part => selectedRobot.leftArm = part" />
-      <ParSelector :parts="availableParts.torsos" position="center" @selectedPart="part => selectedRobot.torso = part" />
-      <ParSelector :parts="availableParts.arms" position="right" @selectedPart="part => selectedRobot.rightArm = part" />
+      <ParSelector
+        :parts="availableParts.arms"
+        position="left"
+        @selectedPart="(part) => (selectedRobot.leftArm = part)"
+      />
+      <ParSelector
+        :parts="availableParts.torsos"
+        position="center"
+        @selectedPart="(part) => (selectedRobot.torso = part)"
+      />
+      <ParSelector
+        :parts="availableParts.arms"
+        position="right"
+        @selectedPart="(part) => (selectedRobot.rightArm = part)"
+      />
     </div>
     <div class="bottom-row">
-      <ParSelector :parts="availableParts.bases" position="bottom" @selectedPart="part => selectedRobot.base = part" />
+      <ParSelector
+        :parts="availableParts.bases"
+        position="bottom"
+        @selectedPart="(part) => (selectedRobot.base = part)"
+      />
     </div>
-  </div>
-  <div>
-    <h1>Cart</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Roboto</th>
-          <th class="cost">Cost</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(robot, index) in cart" :key="index">
-          <td>{{ robot.head.title }}</td>
-          <td class="cost">{{ toCurrency(robot.cost) }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
 <script setup>
 import parts from "../data/parts";
-import { toCurrency } from "../shared/formatters";
 import { computed, ref } from "vue";
 import ParSelector from "./PartSelector.vue";
 import CollapsibleSection from "@/shared/CollapsibleSection.vue";
+import { useCartStore } from "@/stores/cartStore";
+
+const cartStore = useCartStore();
 
 const availableParts = parts;
-const cart = ref([]);
 
 const selectedRobot = ref({
   head: {},
@@ -79,14 +83,14 @@ const headBorderColor = computed(() =>
 
 const addToCart = () => {
   const robot = selectedRobot.value;
-  console.log(robot)
+  console.log(robot);
   const cost =
     robot.head.cost +
     robot.base.cost +
     robot.leftArm.cost +
     robot.rightArm.cost +
     robot.torso.cost;
-  cart.value.push({ ...robot, cost });
+  cartStore.cart.push({ ...robot, cost });
 };
 </script>
 

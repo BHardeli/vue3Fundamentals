@@ -9,13 +9,12 @@
 
 <script setup>
 import { computed } from "@vue/reactivity";
-import parts from "../data/parts"
+import parts from "../data/parts";
 
-const props = defineProps(['partType', 'id']);
+const props = defineProps(["partType", "id"]);
 const part = computed(() => {
-    return parts[props.partType].find(part => part.id === +props.id);
+    return parts[props.partType].find((part) => part.id === +props.id);
 });
-
 </script>
 
 <style scoped></style>
