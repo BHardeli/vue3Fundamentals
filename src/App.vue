@@ -3,8 +3,10 @@
     <nav>
       <ul>
         <li class="nav-item">
-          <img class="logo" src="./assets/build-a-bot-logo.png" alt="logo" />
-          Build-a-bot
+          <router-link :to="{ name: 'Home' }" class="nav-link">
+            <img class="logo" src="./assets/build-a-bot-logo.png" alt="logo" />
+            Build-a-bot
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -54,6 +56,11 @@ ul {
   padding: 5px 10px;
   font-size: 22px;
   border-right: 1px solid #bbb;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo {

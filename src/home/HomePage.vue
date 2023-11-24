@@ -1,21 +1,16 @@
 <template>
   <div class="home">
     <div>
-      <img class="robot" src="../assets/robot-home.png" aria-hidden="true" alt="robot"/>
+      <img class="robot" src="../assets/robot-home.png" aria-hidden="true" alt="robot" />
     </div>
     <div class="get-started">
-      <a href="">Get Started</a> building your first robot!
+      <router-link to="/build">Get Started</router-link> building your first robot!
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HomePage',
-  props: {
-    msg: String,
-  },
-};
+<script setup>
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -23,6 +18,7 @@ export default {
 .home {
   text-align: center;
 }
+
 .robot {
   height: 500px;
 }
